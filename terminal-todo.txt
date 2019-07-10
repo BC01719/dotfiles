@@ -8,6 +8,7 @@ X - Move bin --> .bin
     - Workspace setup like at symantec? WITH COLORS :) 
       - automate Hey NextStep stuff - xcode, git stuff, atom, etc.
     - Create script to make a new workspace - write a file with a function in it
+    - Automatic list maker?
     - Look into automator stuff? Python?
   - Practice Bash and ZSH keyboard shortcut
   - Completely customize the entire terminal 

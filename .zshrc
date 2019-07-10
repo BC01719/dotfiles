@@ -115,8 +115,38 @@ alias dotfiles='/usr/local/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # function for setup when cloning
 function setup-home-git {
-  git clone --separate-git-dir=$HOME/.dotfiles https://github.com/anandpiyer/.dotfiles.git tmpdotfiles
-  rsync --recursive --verbose --exclude '.git' tmpdotfiles/ $HOME/
+  git clone --separate-git-dir=${HOME}/.dotfiles https://github.com/anandpiyer/.dotfiles.git tmpdotfiles
+  rsync --recursive --verbose --exclude '.git' tmpdotfiles/ ${HOME}/
   rm -r tmpdotfiles
   dotfiles config --local status.showUntrackedFiles no
 }
+
+## Workspace function
+# load the completion stuff 
+autoload bashcompinit
+bashcompinit
+# get the names of the workspaces
+workspaces=$(ls ~/.bin/workspaces | cut -d '.' -f 1)
+complete -W "${workspaces}" wksp
+
+# Workspace changing function
+# $1: the name of the workspace to use
+function wksp {
+  if [ $# -eq 1 ]; then
+    echo "Entering the ${1} workspace. Happy working!"
+    SECONDS=0
+    source "/Users/robertcolley/.bin/workspaces/${1}.workspace"
+  elif [ $# -gt 1 ]; then
+    echo "Please specify only one workspace."
+  else
+    # reset everything here
+    cd
+    # clear the terminal
+    clear
+    # print the seconds out
+    duration=$SECONDS
+    echo "$(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed. Good work!"
+    SECONDS=0
+  fi          
+}             
+              
