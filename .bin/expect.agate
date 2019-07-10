@@ -1,0 +1,7 @@
+#!/usr/bin/expect
+
+set timeout 20
+eval spawn "ssh rjc1006@agate.cs.unh.edu"
+expect "password:"
+send "7cruka8rUni\r";
+interact
