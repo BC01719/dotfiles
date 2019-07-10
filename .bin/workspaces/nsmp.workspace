@@ -1,0 +1,33 @@
+#!/bin/bash
+# Description:
+#   Sets up Bobby's NextStep Marketplace workspace and provides custom workspace functions.
+# Author:
+#   Robert Colley
+# Date:
+#   7/10/19
+
+## Parameter Checking
+
+## Variable Declarations
+
+## Function Declarations
+# helper function to print script results to output file
+# arg 1 is the page to start the server on.
+function start() {
+  echo "Staring NexStep Marketplace Server."
+  if [ $# -eq 0 ] || [[ $pages =~ (^|[[:space:]])"${1}"($|[[:space:]]) ]]; then
+    open -a firefox -g "http://localhost:3000/${1}"
+  else
+    echo "Page ${1} not found."
+    open -a firefox -g "http://localhost:3000/"
+  fi
+  automator ~/.bin/FirefoxFocus.workflow &> /dev/null
+  npm run dev
+}
+
+## Main Code
+# enter project directory
+cd $ns/nextstep-marketplace
+pages=$(ls -d pages/*/ | cut -d '/' -f 2)
+# completions
+complete -W "$pages" start
