@@ -113,6 +113,7 @@ export REACT_EDITOR=atom
 # home directory dotfiles manager alias
 alias dotfiles='/usr/local/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
+# function for setup when cloning
 function setup-home-git {
   git clone --separate-git-dir=$HOME/.dotfiles https://github.com/anandpiyer/.dotfiles.git tmpdotfiles
   rsync --recursive --verbose --exclude '.git' tmpdotfiles/ $HOME/
