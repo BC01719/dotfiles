@@ -117,4 +117,5 @@ function setup-home-git {
   git clone --separate-git-dir=$HOME/.dotfiles https://github.com/anandpiyer/.dotfiles.git tmpdotfiles
   rsync --recursive --verbose --exclude '.git' tmpdotfiles/ $HOME/
   rm -r tmpdotfiles
+  dotfiles config --local status.showUntrackedFiles no
 }
