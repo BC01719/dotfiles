@@ -16,7 +16,7 @@ WORKFLOWS="/Users/robertcolley/.bin/workflows/"
 # arg 1 is the page to start the server on.
 function start() {
   echo "Staring NexStep Marketplace Server."
-  if [ $# -eq 0 ] || [[ $pages =~ (^|[[:space:]])"${1}"($|[[:space:]]) ]]; then
+  if [ ${#} -eq 0 ] || [[ ${pages} =~ (^|[[:space:]])"${1}"($|[[:space:]]) ]]; then
     open -a firefox -g "http://localhost:3000/${1}"
   else
     echo "Page ${1} not found."
@@ -27,14 +27,30 @@ function start() {
   return 0
 }
 
+# Function for done with workspace
+function finished() {
+  # reset everything here
+  cd
+  clear
+
+  # print the seconds out
+  duration=${SECONDS}
+  echo "$((${duration}/ 60)) minutes and $((${duration} % 60)) seconds elapsed. Good work!"
+  SECONDS=0
+
+  # resets the shell 
+  source ~/.zshrc
+}
+
+# Function to close out of the workspace
 function close() {
   # reset everything here
   cd
   clear
 
   # print the seconds out
-  duration=$SECONDS
-  echo "$(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed. Good work!"
+  duration=${SECONDS}
+  echo "$((${duration}/ 60)) minutes and $((${duration} % 60)) seconds elapsed. Good work!"
   SECONDS=0
 
   # close all the open windows except the terminal window
@@ -45,24 +61,57 @@ function close() {
 
   # unset workspace functions
   unset -f start
+  unset -f demo
   unset -f close
   reset
   return 0
 }
 
+# Function to start a demo
+function demo() {
+  # open firefox to the demo page
+  if [ ${#} -eq 0 ] || [[ ${pages} =~ (^|[[:space:]])"${1}"($|[[:space:]]) ]]; then
+    open -a firefox -g "http://localhost:3000/${1}"
+  else
+    echo "Page ${1} not found."
+    open -a firefox -g "http://localhost:3000/"
+  fi
+
+  # close all the open windows except the terminal window and firefox
+  automator "${WORKFLOWS}NSMP-Demo.workflow" &> /dev/null
+  automator "${WORKFLOWS}/FirefoxFocus.workflow"  &> /dev/null
+
+  npm run dev
+}
+
 ## Main Code
 # enter project directory
-cd $ns/nextstep-marketplace
+cd ${ns}/nextstep-marketplace
 pages=$(ls -d pages/*/ | cut -d '/' -f 2)
 
 # completions
-complete -W "$pages" start
+complete -W "${pages}" start
 
 # open slack
+echo "Opening Workspace Applications."
 open -a slack
 
 # open firefox
 open -a firefox
+open -a firefox -g "https://app.asana.com/0/1124803298170124/list" \
+                -g "https://github.com/NextStepDev/nextstep-marketplace" \
+                -g "https://material-ui.com/getting-started/installation/" 
 
 # open atom to the project
 atom .
+
+echo "Checking github for updates."
+# check git for anything new
+git fetch 
+git pull
+
+# check for outdated packages
+echo "Checking if any packages are outdated."
+npm outdated
+
+echo "Entered the workspace. Happy Working!"

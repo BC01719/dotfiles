@@ -15,11 +15,11 @@ WORKFLOWS="/Users/robertcolley/.bin/workflows/"
 # helper function to print script results to output file
 # arg 1 is the page to start the server on.
 function start() {
-  # build the app
+  # open the project 
+  open ios/hey-nextstep.xcworkspace
 
-  # install the app
-
-  # run the app
+  # start the 6s simulator
+  xcrun simctl boot 13502CBC-0588-4BC2-A532-20DC5F767B2C
 
   # start the expo server
   expo start

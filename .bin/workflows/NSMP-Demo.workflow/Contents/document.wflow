@@ -55,7 +55,10 @@
 					<key>appException</key>
 					<false/>
 					<key>fileNames</key>
-					<array/>
+					<array>
+						<string>/Applications/Firefox.app</string>
+						<string>/Applications/iTerm.app</string>
+					</array>
 					<key>saveChanges</key>
 					<true/>
 				</dict>
@@ -74,15 +77,15 @@
 				<key>Class Name</key>
 				<string>AMQuitAllApplicationsAction</string>
 				<key>InputUUID</key>
-				<string>02F36444-3BC1-4EFA-9B59-1A2B873F1751</string>
+				<string>AD3FCB8A-5192-43DE-A045-D28DBC177E8F</string>
 				<key>Keywords</key>
 				<array>
 					<string>Quit</string>
 				</array>
 				<key>OutputUUID</key>
-				<string>031272F2-D7B9-4694-9117-1286D840D53A</string>
+				<string>8B630CA7-ABE4-4DC7-9E4A-3B70BACF8654</string>
 				<key>UUID</key>
-				<string>7C343ACE-B360-4C03-9022-0F8CEFCA7F4A</string>
+				<string>31342FAE-601D-41A4-BB1F-37F655BD403F</string>
 				<key>UnlocalizedApplications</key>
 				<array>
 					<string>Finder</string>
@@ -129,6 +132,8 @@
 						<string>2</string>
 					</dict>
 				</dict>
+				<key>conversionLabel</key>
+				<integer>0</integer>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>

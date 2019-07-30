@@ -1,6 +1,9 @@
 ## Bobby's ZSHRC!
 ## July 10, 2019
 
+# for AWS
+export PATH=/usr/local/bin:$PATH
+
 ## Path to your oh-my-zsh installation.
 export ZSH="/Users/robertcolley/.oh-my-zsh"
 
@@ -63,11 +66,14 @@ function wksp {
     source "/Users/robertcolley/.bin/workspaces/${1}/workspace"
     ZSH_THEME="${1}"
     source $ZSH/oh-my-zsh.sh
-    clear
+    CURRENT_WORKSPACE="${1}"
   else 
-    # print an error message.
-    if test ${?}; then 
+    if [ "${CURRENT_WORKSPACE}" != "" ]; then 
+      close
+    else 
+      # print an error message.
       echo "Please choose a workspace"
     fi
   fi          
 } 
+
