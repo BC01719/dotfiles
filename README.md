@@ -1,4 +1,4 @@
-Bob's Terminal Upgrade
+# Bob's Terminal Upgrade
 - X Git repo for home directory with dot files
 - X Remove clunky vimrc and bashrc in ~/Development
 - X Clean up unecessary .files
